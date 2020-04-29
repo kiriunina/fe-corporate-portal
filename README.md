@@ -1,27 +1,39 @@
-# FeCorporatePortal
+# Тестовое задание по Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
+##Бизнес требования
+Я, как пользователь ivanov могу зайти на главную страницу Системы, и введя в окне авторизации ivanov для логина и ivanov для пароля, перейти к странице просмотра моего документа.
+Документ представлен из блоков заголовка, блока содержимого (любой текст из пары абзацев) и кнопки "Утвердить" и "Отклонить". Также доступно поле выбора значений резолюции - "Полностью согласен", "Согласен", "Не согласен", "Разрешаю красить в синий цвет".
+Также доступно для ввода не обязательное поле комментария.
+Я могу нажав на кнопку выполнить действие утверждения, и увидеть на экране вместо документа (без перезагрузки всего контента страницы) результаты утверждения документа.
 
-## Development server
+##Техническое задание
+Требуется реализовать web-систему с использованием Angular v.8 (или 9)
+Система предусматривает следующие компоненты:
+* компонент авторизации (например соответствующий guard) для авторизации пользователя
+* компонент просмотра и утверждения документа
+* сервис документа для обращения к backend для выполнения операции получения документа и утверждения
+* сервис авторизации
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+В сервисе документа предусматривается mock операция получения документа.
+Входные параметры - ID документа, выходные - структура документа в объекте JSON из параметров - название и содержимое.
 
-## Code scaffolding
+В сервисе документа предусматривается mock-реализация операции утверждения документа, которая принимает следующую структуру входящих параметров:
+``` bash
+{
+	"approver": "ivanov", //username утверждающего
+	"resolution": "approved", // резолюция утверждения
+	"comment": "все классно", // комментарий 
+	"state": 1				// статус действия 1-утвердить, 0-отклонить
+}
+```  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Сервис frontend обрабатывает ошибки и регистрируют их в консоли.
+Кроме того в случае успеха возвращается текст "Документ успешно утвержден" в составе простейшего JSON объекта.. Данный текст выводится пользователю.
 
-## Build
+Сервис авторизации реализуется произвольно, по желанию соискателя. Главное назначение вернуть в guard информацию о разрешении или запрете доступа пользователя к документу.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Во всех операциях сервисов frontend реализуется условный опрос сервиса в backend (фактический запрос как и backend не реализуется) который возвращает code 200 со структурой ответа, иначе любой иной код ошибки.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Верстка выполняется в соответствии с предпочтениями разработчика.
+Допустимо оставить шаблонные элементы типового проекта angular
+CSS блок не должен быть пустым и наполняется в соответствии с предпочтениями разработчика.
