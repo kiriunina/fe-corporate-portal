@@ -1,0 +1,11 @@
+<nav *ngIf="isAuth">
+  <div>
+    <a routerLink="/" mat-button>
+      <span>FE corporate portal</span>
+    </a>
+
+    <a mat-button (click)="logout()">
+      <span>Выйти</span>
+    </a>
+  </div>
+</nav>

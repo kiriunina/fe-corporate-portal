@@ -7,3 +7,7 @@ $fe-accent: mat-palette($mat-pink, A200, A100, A400);
 $fe-warn: mat-palette($mat-red);
 
 $fe-theme: mat-light-theme($fe-primary, $fe-accent, $fe-warn);
+
+:root {
+  --fe-font-family: Montserrat, sans-serif;
+}

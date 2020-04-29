@@ -23,6 +23,7 @@ div.btn-block {
 
   button {
     margin: 0 4px;
+    font-family: var(--fe-font-family);
   }
 }
 
@@ -35,6 +36,7 @@ form {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    font-family: var(--fe-font-family);
   }
 
   mat-form-field {

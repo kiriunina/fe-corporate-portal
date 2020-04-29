@@ -12,12 +12,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DocumentComponent } from './components/document/document.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {BACKEND_MOCK_PROVIDERS} from './providers/backend-providers';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    DocumentComponent
+    DocumentComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -34,6 +34,13 @@ export class AuthServiceMock implements IAuthService{
     return of(false);
   }
 
+  logout(): Observable<boolean> {
+    localStorage.removeItem(LOGIN);
+    localStorage.removeItem(TOKEN);
+
+    return of(true);
+  }
+
   getUserFromLocalStorage(): User | null | undefined {
     const login = localStorage.getItem(LOGIN);
 

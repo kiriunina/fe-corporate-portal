@@ -1,0 +1,17 @@
+div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #444444;
+  height: 40px;
+
+  a {
+    font-family: var(--fe-font-family);
+    font-weight: 400;
+    color: whitesmoke;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
