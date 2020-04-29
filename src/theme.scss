@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$fe-primary: mat-palette($mat-blue-gray);
+$fe-accent: mat-palette($mat-pink, A200, A100, A400);
+$fe-warn: mat-palette($mat-red);
+
+$fe-theme: mat-light-theme($fe-primary, $fe-accent, $fe-warn);

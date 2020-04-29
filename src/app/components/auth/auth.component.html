@@ -1,0 +1,17 @@
+<div class="shadow-box">
+  <h1>FE corporate portal</h1>
+
+  <form [formGroup]="authFormGroup">
+    <mat-form-field>
+      <input matInput name="email" type="email" placeholder="Email" [formControl]="emailFormControl" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput name="password" type="password" placeholder="Пароль" [formControl]="passwordFormControl" required>
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" [disabled]="isAuthFormInvalid" (click)="login()">Войти</button>
+  </form>
+</div>
+
+<p *ngIf="isError" class="error">Возникла ошибка при авторизации</p>
