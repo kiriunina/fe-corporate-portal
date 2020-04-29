@@ -3,8 +3,8 @@ import {Observable, of} from 'rxjs';
 import {Document} from '../models/document';
 import {Resolution} from '../models/resolution';
 import {Response} from '../models/response';
-import {DOCUMENT_MOCKS} from '../mocks/document';
-import {RESPONSE_MOCKS} from '../mocks/response';
+import {DOCUMENT_MOCKS} from '../consts/mocks/document';
+import {RESPONSE_MOCKS} from '../consts/mocks/response';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,6 @@ export class DocumentService {
   }
 
   approveDocument(resolution: Resolution): Observable<Response> {
-    return of(RESPONSE_MOCKS[0]);
+    return of(RESPONSE_MOCKS[resolution.state]);
   }
 }

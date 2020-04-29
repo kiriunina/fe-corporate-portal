@@ -1,18 +1,19 @@
-<section *ngIf="document">
-  <div class="document">
-    <h2>{{document.name}}</h2>
+<section>
+  <div *ngIf="document && response === null">
+    <div class="document">
+      <h2>Документ "{{document.name}}"</h2>
 
-    <p>{{document.content}}</p>
-  </div>
+      <p>{{document.content}}</p>
+    </div>
 
-  <form novalidate autocomplete="off" [formGroup]="resolutionFormGroup">
-    <mat-radio-group [formControl]="resolutionFormControl">
-      <mat-radio-button *ngFor="let resolution of resolutions" [value]="resolution" required>
-        {{resolution}}
-      </mat-radio-button>
-    </mat-radio-group>
+    <form novalidate autocomplete="off" [formGroup]="resolutionFormGroup">
+      <mat-radio-group [formControl]="resolutionFormControl">
+        <mat-radio-button *ngFor="let resolution of resolutions" [value]="resolution.action" required>
+          {{resolution.name}}
+        </mat-radio-button>
+      </mat-radio-group>
 
-    <mat-form-field>
+      <mat-form-field>
       <textarea matInput
                 id="{{commentAreaId}}"
                 placeholder="Комментарий"
@@ -20,16 +21,22 @@
                 [formControl]="commentFormControl">
 
       </textarea>
-    </mat-form-field>
-  </form>
+      </mat-form-field>
+    </form>
 
-  <div class="btn-block">
-    <button mat-raised-button color="accent" [disabled]="isInvalidResolutionForm" (click)="approve(1)" >Утвердить</button>
-    <button mat-raised-button color="primary" [disabled]="isInvalidResolutionForm" (click)="approve(0)">Отклонить</button>
+    <div class="btn-block">
+      <button mat-raised-button color="accent" [disabled]="isInvalidResolutionForm" (click)="approve(1)" >Утвердить</button>
+      <button mat-raised-button color="primary" [disabled]="isInvalidResolutionForm" (click)="approve(0)">Отклонить</button>
+    </div>
+  </div>
+
+  <div *ngIf="response" class="approve-block">
+    <h2>Документ "{{document.name}}"</h2>
+
+    <p><b>Результат утверждения документа:</b> {{response}}</p>
   </div>
 </section>
 
-<div *ngIf="response">{{response}}</div>
 
 
 

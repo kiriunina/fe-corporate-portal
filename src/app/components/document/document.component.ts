@@ -5,6 +5,9 @@ import {Document} from '../../models/document';
 import {Response} from '../../models/response';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Resolution} from '../../models/resolution';
+import {UserStorageService} from '../../services/user-storage.service';
+import {ResolutionAction} from '../../models/resolution-action';
+import {RESOLUTION_ACTIONS_MOCKS} from '../../consts/mocks/resolution-action';
 
 const resolutionFormControlName = 'resolutionFormControlName';
 const commentFormControlName = 'commentFormControlName';
@@ -25,14 +28,9 @@ export class DocumentComponent implements OnInit {
   document: Document |null = null;
   response: string | null = null;
 
-  readonly resolutions: string[] = [
-    'Полностью согласен',
-    'Согласен',
-    'Не согласен',
-    'Разрешаю красить в синий цвет',
-  ];
+  readonly resolutions: ResolutionAction[] = RESOLUTION_ACTIONS_MOCKS;
 
-  constructor(private documentService: DocumentService) { }
+  constructor(private documentService: DocumentService, private userStorageService: UserStorageService) { }
 
   get resolutionFormControl(): FormControl {
     return this.resolutionFormGroup.get(resolutionFormControlName) as FormControl;
@@ -55,6 +53,7 @@ export class DocumentComponent implements OnInit {
       .pipe(first())
       .subscribe((document: Document) => {
         this.document = document;
+        this.response = null;
       }, (error: string) => {
         console.error(error);
       });
@@ -62,20 +61,20 @@ export class DocumentComponent implements OnInit {
 
   approve(state: number) {
     const resolution: Resolution = {
-      approver: '',
-      resolution: '',
+      approver: this.userStorageService.user.email,
+      resolution: this.resolutionFormControl.value,
       comment: this.commentFormControl.value,
       state
     };
 
+    console.log(resolution);
+
     this.documentService.approveDocument(resolution).pipe(first()).subscribe((response: Response) => {
       this.response = response.message;
-      this.document = null;
     });
   }
 
   private getDocumentId(): number {
-    return 0;
+    return this.userStorageService.user.documentId;
   }
-
 }

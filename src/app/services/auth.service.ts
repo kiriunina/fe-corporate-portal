@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {USER_AUTH_DATA} from '../mocks/user-auth-data';
+import {USER_AUTH_DATA} from '../consts/mocks/user-auth-data';
 import {Observable, of} from 'rxjs';
+import {UserStorageService} from './user-storage.service';
 
 const LOGIN = 'login';
 const TOKEN = 'token';
@@ -10,18 +11,20 @@ const TOKEN = 'token';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private userStorageService: UserStorageService) { }
 
   isAuth(): boolean {
     return localStorage.getItem(TOKEN) !== null;
   }
 
   login(email: string, password: string): Observable<boolean> {
-    const isUserExist = USER_AUTH_DATA.some(item => item.email === email && item.password === password);
+    const user = USER_AUTH_DATA.find(item => item.email === email && item.password === password);
 
-    if (isUserExist) {
+    if (user) {
       localStorage.setItem(LOGIN, email);
       localStorage.setItem(TOKEN, this.generateToken());
+
+      this.userStorageService.user = user;
 
       return of(true);
     }

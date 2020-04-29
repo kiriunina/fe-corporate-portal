@@ -18,7 +18,7 @@ div.document {
 
 div.btn-block {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 20px auto;
 
   button {
@@ -27,8 +27,8 @@ div.btn-block {
 }
 
 form {
-  width: 100%;
   max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
 
   mat-radio-group {
@@ -40,5 +40,14 @@ form {
   mat-form-field {
     width: 100%;
     margin-top: 40px;
+  }
+}
+
+.approve-block {
+  max-width: 900px;
+  padding: 20px;
+
+  p {
+    margin: 20px;
   }
 }
