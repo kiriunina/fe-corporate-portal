@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "fe-corporate-portal"
+    }
+  },
+  "defaultProject": "fe-corporate-portal",
+  "cli": {
+    "analytics": false
+  }
 }
