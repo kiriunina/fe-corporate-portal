@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {DocumentService} from '../../services/document.service';
+import {Component, Inject, OnInit} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {Document} from '../../models/document';
 import {Response} from '../../models/response';
@@ -8,6 +7,8 @@ import {Resolution} from '../../models/resolution';
 import {UserStorageService} from '../../services/user-storage.service';
 import {ResolutionAction} from '../../models/resolution-action';
 import {RESOLUTION_ACTIONS_MOCKS} from '../../consts/mocks/resolution-action';
+import {DOCUMENT_SERVICE_TOKEN, IDocumentService} from '../../services/interfaces/idocument-service';
+import {AUTH_SERVICE_TOKEN, IAuthService} from '../../services/interfaces/iauth-service';
 
 const resolutionFormControlName = 'resolutionFormControlName';
 const commentFormControlName = 'commentFormControlName';
@@ -30,7 +31,9 @@ export class DocumentComponent implements OnInit {
 
   readonly resolutions: ResolutionAction[] = RESOLUTION_ACTIONS_MOCKS;
 
-  constructor(private documentService: DocumentService, private userStorageService: UserStorageService) { }
+  constructor(@Inject(DOCUMENT_SERVICE_TOKEN) private documentService: IDocumentService,
+              @Inject(AUTH_SERVICE_TOKEN) private authService: IAuthService,
+              private userStorageService: UserStorageService) { }
 
   get resolutionFormControl(): FormControl {
     return this.resolutionFormGroup.get(resolutionFormControlName) as FormControl;
@@ -67,14 +70,24 @@ export class DocumentComponent implements OnInit {
       state
     };
 
-    console.log(resolution);
-
     this.documentService.approveDocument(resolution).pipe(first()).subscribe((response: Response) => {
       this.response = response.message;
     });
   }
 
   private getDocumentId(): number {
-    return this.userStorageService.user.documentId;
+    if (this.userStorageService.user) {
+      return this.userStorageService.user.documentId;
+    }
+
+    const user = this.authService.getUserFromLocalStorage();
+
+    if (user) {
+      this.userStorageService.user = user;
+
+      return user.documentId;
+    }
+
+    return 0;
   }
 }

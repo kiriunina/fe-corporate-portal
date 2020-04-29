@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DocumentComponent } from './components/document/document.component';
 import {MatRadioModule} from '@angular/material/radio';
+import {BACKEND_MOCK_PROVIDERS} from './providers/backend-providers';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatButtonModule,
     MatRadioModule,
   ],
-  providers: [],
+  providers: [BACKEND_MOCK_PROVIDERS],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

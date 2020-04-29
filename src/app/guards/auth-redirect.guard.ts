@@ -6,17 +6,16 @@ import {AUTH_SERVICE_TOKEN, IAuthService} from '../services/interfaces/iauth-ser
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthRedirectGuard implements CanActivate {
   constructor(@Inject(AUTH_SERVICE_TOKEN) private authService: IAuthService, private router: Router) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     if (this.authService.isAuth()) {
-      return true;
+      this.router.navigate(['/']);
+
+      return false;
     }
 
-    this.router.navigate(['/login']);
-
-    return false;
+    return true;
   }
-
 }

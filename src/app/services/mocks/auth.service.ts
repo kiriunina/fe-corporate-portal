@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {USER_AUTH_DATA} from '../consts/mocks/user-auth-data';
+import {USER_AUTH_DATA} from '../../consts/mocks/user-auth-data';
 import {Observable, of} from 'rxjs';
-import {UserStorageService} from './user-storage.service';
+import {UserStorageService} from '../user-storage.service';
+import {IAuthService} from '../interfaces/iauth-service';
+import {User} from '../../models/user';
 
 const LOGIN = 'login';
 const TOKEN = 'token';
@@ -9,7 +11,7 @@ const TOKEN = 'token';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthServiceMock implements IAuthService{
 
   constructor(private userStorageService: UserStorageService) { }
 
@@ -30,6 +32,12 @@ export class AuthService {
     }
 
     return of(false);
+  }
+
+  getUserFromLocalStorage(): User | null | undefined {
+    const login = localStorage.getItem(LOGIN);
+
+    return login ? USER_AUTH_DATA.find(item => item.email === login) : null;
   }
 
   private generateToken(): string {

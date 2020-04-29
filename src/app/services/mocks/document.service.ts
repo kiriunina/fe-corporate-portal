@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {Document} from '../models/document';
-import {Resolution} from '../models/resolution';
-import {Response} from '../models/response';
-import {DOCUMENT_MOCKS} from '../consts/mocks/document';
-import {RESPONSE_MOCKS} from '../consts/mocks/response';
+import {Document} from '../../models/document';
+import {Resolution} from '../../models/resolution';
+import {Response} from '../../models/response';
+import {DOCUMENT_MOCKS} from '../../consts/mocks/document';
+import {RESPONSE_MOCKS} from '../../consts/mocks/response';
+import {IDocumentService} from '../interfaces/idocument-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DocumentService {
+export class DocumentServiceMock implements IDocumentService{
 
   constructor() { }
 

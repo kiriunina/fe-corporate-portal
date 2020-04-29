@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
 import {first} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {AUTH_SERVICE_TOKEN, IAuthService} from '../../services/interfaces/iauth-service';
 
 const emailFormControlName = 'emailFormControlName';
 const passwordFormControlName = 'passwordFormControlName';
@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
 
   isError: boolean;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(@Inject(AUTH_SERVICE_TOKEN) private authService: IAuthService, private router: Router) { }
 
   get emailFormControl(): FormControl {
     return this.authFormGroup.get(emailFormControlName) as FormControl;
