@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    const isUserExist = USER_AUTH_DATA.includes({email, password});
+    const isUserExist = USER_AUTH_DATA.some(item => item.email === email && item.password === password);
 
     if (isUserExist) {
       localStorage.setItem(LOGIN, email);
