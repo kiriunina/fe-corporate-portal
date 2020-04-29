@@ -1,5 +1,5 @@
 <section>
-  <div *ngIf="document && response === null">
+  <div *ngIf="document && response === null" class="full-height">
     <div class="document">
       <h2>Документ "{{document.name}}"</h2>
 
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <div *ngIf="response" class="approve-block">
+  <div *ngIf="response" class="approve-block full-height">
     <h2>Документ "{{document.name}}"</h2>
 
     <mat-icon [ngClass]="{'success': resolutionResult, 'waiting': !resolutionResult}">{{resolutionResult ? 'done_outline' : 'hourglass_empty'}}</mat-icon>
