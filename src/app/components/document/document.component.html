@@ -33,7 +33,12 @@
   <div *ngIf="response" class="approve-block">
     <h2>Документ "{{document.name}}"</h2>
 
-    <p><b>Результат утверждения документа:</b> {{response}}</p>
+    <mat-icon [ngClass]="{'success': resolutionResult, 'waiting': !resolutionResult}">{{resolutionResult ? 'done_outline' : 'hourglass_empty'}}</mat-icon>
+
+    <div>
+      <p class="title">Результат утверждения документа:</p>
+      <p class="value">{{response}}</p>
+    </div>
   </div>
 </section>
 

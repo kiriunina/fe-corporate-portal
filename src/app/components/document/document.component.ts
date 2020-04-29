@@ -28,6 +28,7 @@ export class DocumentComponent implements OnInit {
 
   document: Document |null = null;
   response: string | null = null;
+  resolutionResult: number | null = null;
 
   readonly resolutions: ResolutionAction[] = RESOLUTION_ACTIONS_MOCKS;
 
@@ -72,6 +73,7 @@ export class DocumentComponent implements OnInit {
 
     this.documentService.approveDocument(resolution).pipe(first()).subscribe((response: Response) => {
       this.response = response.message;
+      this.resolutionResult = state;
     });
   }
 

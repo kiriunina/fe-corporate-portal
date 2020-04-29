@@ -13,6 +13,7 @@ import { DocumentComponent } from './components/document/document.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {BACKEND_MOCK_PROVIDERS} from './providers/backend-providers';
 import { HeaderComponent } from './components/header/header.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HeaderComponent } from './components/header/header.component';
     MatInputModule,
     MatButtonModule,
     MatRadioModule,
+    MatIconModule,
   ],
   providers: [BACKEND_MOCK_PROVIDERS],
   bootstrap: [AppComponent]

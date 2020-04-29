@@ -49,10 +49,37 @@ form {
 }
 
 .approve-block {
-  max-width: 900px;
+  width: 100%;
+  max-width: 580px;
   padding: 20px;
 
-  p {
-    margin: 20px;
+  div {
+    display: flex;
+    justify-content: space-around;
+
+    p.title {
+      font-weight: 400;
+      color: #555555;
+    }
+
+    p.value {
+      font-weight: 500;
+      color: #444444;
+    }
   }
+
+  mat-icon {
+    margin: 20px auto;
+    width: 100px;
+    height: 100px;
+    font-size: 100px;
+  }
+}
+
+.success {
+  color: green;
+}
+
+.waiting {
+  color: orange;
 }
